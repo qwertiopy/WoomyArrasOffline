@@ -225,9 +225,6 @@ for (let e of ["log", "warn", "info", "spawn", "error"]) {
     let rankedRoomTicker = 0,
       rankedRooms = {};
 
-    function* chunkar(e, t) {
-      for (let s = 0; s < e.length; s += t) yield e.slice(s, s + t);
-    }
     class RankedRoom {
       constructor(e) {
         (this.clients = e),
@@ -12896,7 +12893,7 @@ for (let e of ["log", "warn", "info", "spawn", "error"]) {
           ) {
             (room.wallCollisions = []), grid.update();
             let t = grid.queryForCollisionPairs();
-            for (let s of chunkar(t, 400)) for (let t of s) e(t);
+            for (let s = 0; s < t.length; s++) e(t[s]);
           }
           newLogs.collision.stop(), logs.collide.mark(), logs.entities.set();
           for (let e = 0, s = entities.length; e < s; e++) t(entities[e]);
